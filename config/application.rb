@@ -8,6 +8,10 @@ Bundler.require(*Rails.groups)
 
 module MyShopifyApp
   class Application < Rails::Application
+    
+    # Shopify API connection credentials:
+    config.shopify.api_key = '7c84d2e30df2ef43220719214ada99d5'
+    config.shopify.secret = '2c45a72409346ab65025760bf41a52d6'
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

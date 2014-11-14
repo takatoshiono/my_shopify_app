@@ -39,3 +39,8 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'shopify_app'
+
+group :development, :test do
+  gem "less-rails-bootstrap"
+  gem "therubyracer", platforms: :ruby
+end
