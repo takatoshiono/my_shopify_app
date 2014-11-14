@@ -8,11 +8,19 @@ class HomeController < ApplicationController
   end
   
   def index
-    # get 10 products
-    @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
+    # refs: https://www.youtube.com/watch?v=GZfdg8HwLlI
+    if params[:id]
+      shop = ShopifyAPI::Shop.current
+      product = ShopifyAPI::Product.find(params[:id])
+      status = "#{product.title} now available for $#{product.price_range} at #{shop.name} http://#{shop.domain}/products/#{product.handle}"
+      redirect_to "http://twitter.com/home?status=#{URI.escape(status)}"
+    else
+      # get 10 products
+      @products = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
 
-    # get latest 5 orders
-    @orders   = ShopifyAPI::Order.find(:all, :params => {:limit => 5, :order => "created_at DESC" })
+      # get latest 5 orders
+      @orders   = ShopifyAPI::Order.find(:all, :params => {:limit => 5, :order => "created_at DESC" })
+    end
   end
   
 end
